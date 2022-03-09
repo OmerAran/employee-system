@@ -6,4 +6,6 @@ import com.example.demo.modal.Worker;
 
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
+	
+
 }
