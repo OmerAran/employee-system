@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const WORKER_API_BASE_URL ="http://localhost:8080/api/workers";
+const WORKER_API_BASE_URL ="http://localhost:8080/workers/";
 
 class WorkerService{
 

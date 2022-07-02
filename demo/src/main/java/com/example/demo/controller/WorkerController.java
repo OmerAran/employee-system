@@ -22,25 +22,25 @@ import com.example.demo.repository.WorkerRepository;
 
 @CrossOrigin(origins ="http://localhost:3000")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/")
 public class WorkerController {
 	
 	@Autowired
 	private WorkerRepository workerRepository ;
 
-	@GetMapping("/workers")
+	@GetMapping("workers")
 	public List<Worker> getAllWorkers(){
 		return workerRepository.findAll();
 		
 	}
-	@PostMapping("{/workers}")
+	@PostMapping("workers")
 	public Worker createWorker(@RequestBody Worker worker) {
 		
 		return workerRepository.save(worker)	 ;	
 		
 	}
 	
-	@GetMapping("{/workers/{id}")
+	@GetMapping("workers/{id}")
 	public ResponseEntity<Worker> getWorkerById(@PathVariable Long id) {
 		Worker worker = workerRepository.findById(id).
 				orElseThrow(()-> new SourceNotFoundException("Worker didn't found who has this id : )"+id));
@@ -49,7 +49,7 @@ public class WorkerController {
 		
 	}
 	
-	@PutMapping("/workers/{id}")
+	@PutMapping("workers/{id}")
 	public ResponseEntity<Worker> updateWorker(@PathVariable Long id, @RequestBody Worker workerDetails) {
 		
 		Worker worker = workerRepository.findById(id).
@@ -65,7 +65,7 @@ public class WorkerController {
 	}
 	
 	
-	@DeleteMapping("/workers/{id}")
+	@DeleteMapping("workers/{id}")
 	public ResponseEntity<Map<String,Boolean>> deleteWorker(@PathVariable Long id) {
 		Worker worker = workerRepository.findById(id).
 				orElseThrow(()-> new SourceNotFoundException("Worker didn't found who has this id : )"+id));

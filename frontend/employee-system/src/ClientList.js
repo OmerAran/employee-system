@@ -12,13 +12,13 @@ class ClientList extends Component {
     }
 
     componentDidMount() {
-        fetch('/clients')
+        fetch('/workers')
             .then(response => response.json())
             .then(data => this.setState({clients: data}));
     }
 
     async remove(id) {
-        await fetch(`/clients/${id}`, {
+        await fetch(`/workers/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -35,11 +35,11 @@ class ClientList extends Component {
 
         const clientList = clients.map(client => {
             return <tr key={client.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{client.name}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{client.firstName}</td>
                 <td>{client.email}</td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/clients/" + client.id}>Edit</Button>
+                        <Button size="sm" color="primary" tag={Link} to={"/workers/" + client.id}>Edit</Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(client.id)}>Delete</Button>
                     </ButtonGroup>
                 </td>
@@ -51,7 +51,7 @@ class ClientList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/clients/new">Add Client</Button>
+                        <Button color="success" tag={Link} to="/workers/new">Add Client</Button>
                     </div>
                     <h3>Clients</h3>
                     <Table className="mt-4">

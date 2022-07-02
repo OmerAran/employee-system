@@ -21,7 +21,7 @@ class ClientEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const client = await (await fetch(`/clients/${this.props.match.params.id}`)).json();
+            const client = await (await fetch(`/workers/${this.props.match.params.id}`)).json();
             this.setState({item: client});
         }
     }
@@ -39,7 +39,7 @@ async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
 
-    await fetch('/clients' + (item.id ? '/' + item.id : ''), {
+    await fetch('/workers' + (item.id ? '/' + item.id : ''), {
         method: (item.id) ? 'PUT' : 'POST',
         headers: {
             'Accept': 'application/json',
@@ -47,12 +47,12 @@ async handleSubmit(event) {
         },
         body: JSON.stringify(item),
     });
-    this.props.history.push('/clients');
+    this.props.history.push('/workers');
 }
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Client' : 'Add Client'}</h2>;
+        const title = <h2>{item.id ? 'Edit Worker' : 'Add Worker'}</h2>;
 
         return <div>
             <AppNavbar/>
@@ -61,7 +61,7 @@ async handleSubmit(event) {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="name">Name</Label>
-                        <Input type="text" name="name" id="name" value={item.firstName || ''}
+                        <Input type="text" name="firstName" id="name" value={item.firstName || ''}
                                onChange={this.handleChange} autoComplete="name"/>
                     </FormGroup>
                     <FormGroup>
@@ -71,7 +71,7 @@ async handleSubmit(event) {
                     </FormGroup>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/clients">Cancel</Button>
+                        <Button color="secondary" tag={Link} to="/workers">Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>
